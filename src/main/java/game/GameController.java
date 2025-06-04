@@ -2,6 +2,7 @@ package game;
 
 
 import game.models.GameModel;
+import game.models.Interactable;
 import game.models.Position;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -52,7 +53,7 @@ public class GameController {
     }
 
     private void render(GraphicsContext gc){
-        int[][] map = this.model.getMap();
+        int[][] map = this.model.getMap().getBitMap();
         for (int line = 0; line < map.length; line++) {
             for (int col = 0; col < map[line].length; col++) {
                 if(map[line][col]==1){//Wall
@@ -70,6 +71,12 @@ public class GameController {
                 gc.fillRect(col*blockSize, line*blockSize, blockSize, blockSize);
             }
         }
+        //Draw Interactable of map
+        for (Interactable i : model.getMap().getInteractables()) {
+            gc.setFill(i.getColor());
+            gc.fillRect(i.getPosition().getX()*blockSize, i.getPosition().getY()*blockSize, blockSize, blockSize);
+        }
+
         //Drawplayer
         Position playerPos = this.model.getPlayerPos();
         gc.setFill(Color.RED);

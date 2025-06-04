@@ -1,7 +1,12 @@
 package game.models;
 
-public class PlayerModel {
+import javafx.scene.paint.Color;
+
+public class Player extends LivingEntity {
     
+    public Player(Position p, int maxHP) {
+        super(p, Color.RED, maxHP);
+    }
     private int posX =11 ;
     private int posY = 19;
 

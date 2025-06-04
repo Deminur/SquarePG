@@ -1,46 +1,29 @@
 package game.models;
 
-import javafx.util.Pair;
+import java.util.ArrayList;
 
 public class GameModel {
 
-    private PlayerModel player = new PlayerModel();
+    private Player player = new Player(new Position(11, 19), 10);
 
-    private int[] forbiddenBlocks = {1,3};
+    private ArrayList<Map> listMaps;
 
-    private final int mapSize = 19;
+    private Map currentMap;
 
-    private int[][] firstMap ={
-        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},
-        {3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,3},
-        {3,3,3,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0},
-        {3,3,3,0,3,3,3,0,0,0,2,2,2,2,0,0,0,0,0,3},
-        {3,3,0,0,3,3,3,3,0,0,2,2,2,2,0,2,2,2,2,3},
-        {3,3,0,0,2,2,2,2,3,0,2,2,2,0,0,3,3,3,3,3},
-        {3,1,0,1,1,1,2,2,3,0,2,2,2,0,3,3,3,3,3,3},
-        {3,1,0,0,0,1,2,2,0,0,2,2,0,0,3,3,3,3,3,3},
-        {3,1,0,0,0,1,2,0,0,0,0,0,0,0,3,3,3,3,3,3},
-        {3,1,1,1,1,1,2,0,0,2,2,2,2,2,3,3,3,3,3,3},
-        {3,3,3,3,3,3,2,2,0,2,2,2,2,2,2,3,3,3,3,3},
-        {3,3,3,3,3,3,2,2,0,0,2,2,2,2,2,3,3,3,3,3},
-        {3,3,3,3,3,3,2,2,2,0,2,2,2,2,2,2,2,2,3,3},
-        {3,3,3,3,3,3,3,3,2,0,0,0,0,0,2,2,2,2,2,3},
-        {3,3,3,3,3,3,3,2,2,2,2,2,0,0,2,2,2,2,2,3},
-        {3,3,3,3,3,3,3,2,2,2,2,0,0,0,2,2,2,2,2,3},
-        {3,3,3,3,3,3,3,2,2,2,2,0,0,0,0,2,2,2,2,3},
-        {3,3,3,3,3,3,3,2,2,2,2,0,0,0,3,3,3,3,3,3},
-        {3,3,3,3,3,3,3,3,3,3,2,0,0,3,3,3,3,3,3,3},
-        {3,3,3,3,3,3,3,3,3,3,3,0,3,3,3,3,3,3,3,3},
-    };
+    public GameModel(){
+        this.listMaps=new ArrayList<>();
+        this.listMaps.add(new Map());
+
+        this.currentMap = this.listMaps.get(0);
+    }
+
+    public void nextMap(){
+        //TODO
+    }
 
     //test if the player can go on the  block described by the Position p
     public boolean testPosition(Position p){
-        for(int i = 0; i<this.forbiddenBlocks.length; i++){
-            if(p.getX()<0 || p.getX()>this.mapSize || p.getY()<0 || p.getY()>this.mapSize || this.firstMap[p.getY()][p.getX()] == this.forbiddenBlocks[i] ){
-                return false;
-            }
-        }
-        return true;
+        return currentMap.testPosition(p);
     }
 
     public void characterPressed(String c){
@@ -86,8 +69,8 @@ public class GameModel {
         }
     }
 
-    public int[][] getMap(){
-        return this.firstMap;
+    public Map getMap(){
+        return this.currentMap;
     }
 
     public Position getPlayerPos(){
