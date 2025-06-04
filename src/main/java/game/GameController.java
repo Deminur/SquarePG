@@ -1,16 +1,13 @@
 package game;
 
-import java.io.IOException;
 
 import game.models.GameModel;
 import game.models.Position;
 import javafx.animation.AnimationTimer;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
@@ -31,8 +28,8 @@ public class GameController {
             long lastUpdate = 0;
             @Override
             public void handle(long now) {
-                if(lastUpdate > 0){
-                    double elapsedTime = (now-lastUpdate)/1_000_000_000.0;
+                double elapsedTime = (now-lastUpdate)/1_000_000_000.0;
+                if(elapsedTime > 0){
                     update();
                     render(canvas.getGraphicsContext2D());
                 }
