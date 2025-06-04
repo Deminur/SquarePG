@@ -25,5 +25,9 @@ public class Position {
         this.y = y;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return this.getX() == ((Position)obj).getX() && this.getY() == ((Position)obj).getY();
+    }
     
 }

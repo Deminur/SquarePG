@@ -49,10 +49,21 @@ public class Map {
         return this.mapSize;
     }
 
-    public boolean testPosition(Position p){
+    public boolean testPosition(Position p, Player player){
         for(int i = 0; i<this.forbiddenBlocks.length; i++){
+            //If in the bound of the map
             if(p.getX()<0 || p.getX()>this.mapSize || p.getY()<0 || p.getY()>this.mapSize || this.map[p.getY()][p.getX()] == this.forbiddenBlocks[i] ){
                 return false;
+            }
+            //If have to interact with entity
+            for (Interactable interactable : this.listInteractables) {
+                if(p.equals(interactable.getPosition())){
+                    interactable.interact(player);
+                    if(interactable.isDestroyed()){
+                        this.listInteractables.remove(interactable);
+                    }
+                    return false;
+                }
             }
         }
         return true;

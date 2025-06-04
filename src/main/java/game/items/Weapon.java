@@ -13,7 +13,7 @@ public class Weapon extends Item{
 
     @Override
     public void use(Interactable target) {
-        target.interact(this);
+        //Nothing happens
     }
     
 }

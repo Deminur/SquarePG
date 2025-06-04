@@ -23,7 +23,7 @@ public class GameModel {
 
     //test if the player can go on the  block described by the Position p
     public boolean testPosition(Position p){
-        return currentMap.testPosition(p);
+        return currentMap.testPosition(p, player);
     }
 
     public void characterPressed(String c){

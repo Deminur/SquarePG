@@ -17,15 +17,15 @@ public class LivingEntity extends Interactable {
     public int hp;
     public int maxHp;
 
-    private Helmet equippedHelmet;
-    private Torso equippedTorso;
-    private Pant equippedPant;
-    private Glove equippedGlove;
-    private Shoe equippedShoe;
+    protected Helmet equippedHelmet;
+    protected Torso equippedTorso;
+    protected Pant equippedPant;
+    protected Glove equippedGlove;
+    protected Shoe equippedShoe;
 
-    private List<Item> inventory;
+    protected List<Item> inventory;
 
-    private Weapon equippedWeapon;
+    protected Weapon equippedWeapon;
 
     public LivingEntity(Position p, Color c, int maxHp) {
         super(p, c);
@@ -35,12 +35,16 @@ public class LivingEntity extends Interactable {
     }
 
     @Override
-    public void interact(Item item) {
-        //TODO
+    public void interact(Player player) {
+        if(player.getWeapon()!=null){
+            System.out.println("AIE ! - "+this.hp+"/"+this.maxHp+" HP");
+            this.takeDmg(player.getWeapon().dmg);
+        }
     }
 
     public void takeDmg(int dmg){
-        //TODO
+        this.hp = this.hp - dmg;
+        this.destroyed = this.hp<=0;
     }
 
     public void heal(int amount){
@@ -49,6 +53,11 @@ public class LivingEntity extends Interactable {
         }else{
             this.hp = this.hp + amount;
         }
+    }
+
+    @Override
+    public boolean isDestroyed() {
+        return this.hp<=0;
     }
     
 }
